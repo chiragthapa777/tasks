@@ -11,13 +11,11 @@ export class PaginationQueryDto {
   @ApiPropertyOptional()
   @Transform(({ value }) => Number(value))
   @IsOptional()
-  @IsString()
   @IsNumber()
   page?: number;
 
   @ApiPropertyOptional()
   @Transform(({ value }) => Number(value))
-  @IsString()
   @IsOptional()
   @IsNumber()
   limit?: number;

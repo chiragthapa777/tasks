@@ -1,9 +1,10 @@
-import { LogOut } from "lucide-react";
 import { Link, Outlet } from "react-router-dom";
+import { useAuth } from "../../providers/AuthProvider";
 
 type Props = {};
 
 export default function Layout({}: Props) {
+  const { logout } = useAuth();
   return (
     <div className=" min-h-screen">
       <header className="bg-white border-b shadow-sm">
@@ -11,7 +12,10 @@ export default function Layout({}: Props) {
           <h1 className="font-bold text-lg">
             <Link to={"/"}>Task App</Link>
           </h1>
-          <button className="flex justify-center items-center underline gap-1 cursor-pointer">
+          <button
+            className="flex justify-center items-center underline gap-1 cursor-pointer"
+            onClick={logout}
+          >
             <span className="font-semibold">Logout</span>
           </button>
         </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import LoginForm from "../../../components/LoginForm/LoginForm";
+import RegisterForm from "../../../components/RegisterForm/RegisterForm";
 
 type Props = {};
 
@@ -13,7 +13,7 @@ export default function RegisterPage({}: Props) {
             Enter your email below to register to Task App
           </p>
         </div>
-        <LoginForm />
+        <RegisterForm />
         <div className=" text-center my-3">
           <p className="text-sm text-gray-500">
             Already have a account? Click{" "}

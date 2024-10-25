@@ -4,19 +4,19 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useAuth } from "../../providers/AuthProvider";
-import { loginSchema } from "../../schemas/login.schema";
-import { login } from "../../services/user.service";
+import { registerSchema } from "../../schemas/register.schema";
+import { register as registerApi } from "../../services/user.service";
 import Alert from "../Alert/Alert";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 
 type Props = {};
 
-export default function LoginForm({}: Props) {
+export default function RegisterForm({}: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -42,7 +42,7 @@ export default function LoginForm({}: Props) {
     setLoading(true);
     try {
       const body = getValues();
-      const response = await login(body);
+      const response = await registerApi(body);
       setAuthUser(response.user, response.accessToken);
     } catch (error) {
       setError(error instanceof Error ? error.message : (error as string));
@@ -60,6 +60,11 @@ export default function LoginForm({}: Props) {
         }}
       />
       <InputField
+        label="Full Name"
+        {...register("name")}
+        errorMessage={errors.name?.message}
+      />
+      <InputField
         label="email"
         placeholder="example@gmail.com"
         {...register("email")}
@@ -71,13 +76,19 @@ export default function LoginForm({}: Props) {
         {...register("password")}
         errorMessage={errors.password?.message}
       />
+      <InputField
+        label="Confirm Password"
+        type="password"
+        {...register("confirmPassword")}
+        errorMessage={errors.confirmPassword?.message}
+      />
       <Button
         type="submit"
         className="text-white"
         loading={loading}
         disabled={isDirty && !isValid}
       >
-        Login
+        Register
       </Button>
     </form>
   );
