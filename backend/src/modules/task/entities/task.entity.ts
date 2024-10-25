@@ -21,6 +21,9 @@ export class Task {
   @Prop({ type: Boolean, default: false })
   done: boolean;
 
+  @Prop({ type: Date, required: true })
+  scheduledAt: Date;
+
   createdAt?: Date;
 }
 

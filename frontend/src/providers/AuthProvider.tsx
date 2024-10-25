@@ -6,16 +6,19 @@ export type AuthContextType = {
   user: userType | null;
   logout: () => void;
   setAuthUser: (user: userType, accessToken: string) => void;
+  loading: boolean;
 };
 
 const AuthContext = React.createContext<AuthContextType>({
   user: null,
   logout: () => {},
   setAuthUser: () => {},
+  loading: true,
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<userType | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadUser();
@@ -29,6 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(decoded);
       } catch (error) {}
     }
+    setLoading(false);
   };
 
   const logout = (): void => {
@@ -42,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ logout, user, setAuthUser }}>
+    <AuthContext.Provider value={{ logout, user, setAuthUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

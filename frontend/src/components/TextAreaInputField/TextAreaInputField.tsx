@@ -4,10 +4,10 @@ import { twMerge } from "tailwind-merge";
 type Props = {
   label: string;
   errorMessage?: string;
-} & InputHTMLAttributes<HTMLInputElement>;
+} & InputHTMLAttributes<HTMLTextAreaElement>;
 
-const InputField = forwardRef<HTMLInputElement, Props>(
-  ({ label, errorMessage, className, ...props }: Props, ref) => {
+const TextAreaInputField = forwardRef<HTMLInputElement, Props>(
+  ({ label, errorMessage, className, ...props }: Props) => {
     return (
       <div className="flex flex-col">
         <label
@@ -16,19 +16,18 @@ const InputField = forwardRef<HTMLInputElement, Props>(
         >
           {label}
         </label>
-        <input
+        <textarea
           className={twMerge(
             `border p-2 rounded-md shadow-sm text-sm`,
             className,
             errorMessage && "border-red-500 focus:outline-none"
           )}
           {...props}
-          ref={ref}
-        />
+        ></textarea>
         <p className="text-red-500 text-xs"> {errorMessage}</p>
       </div>
     );
   }
 );
 
-export default InputField;
+export default TextAreaInputField;

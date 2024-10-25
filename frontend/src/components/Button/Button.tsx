@@ -14,14 +14,15 @@ export default function Button({
   disabled,
   ...props
 }: Props) {
+  const disabledCases = loading || disabled;
   return (
     <button
       className={twMerge(
-        "uppercase w-full p-2 border bg-slate-900 text-white text-bold hover:bg-slate-800 flex justify-center items-center gap-3",
+        "uppercase w-full p-2 border bg-slate-900 text-white text-bold hover:bg-slate-800 flex justify-center items-center gap-3 rounded-md px-4 disabled:opacity-50 disabled:cursor-not-allowed",
         className
       )}
       {...props}
-      disabled={loading || disabled}
+      disabled={disabledCases}
     >
       {loading ? <Spinner /> : ""}
       {children}

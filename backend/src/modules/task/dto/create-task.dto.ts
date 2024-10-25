@@ -1,6 +1,13 @@
 import { Type } from '@nestjs/common';
 import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import {
+  IsBoolean,
+  IsDate,
+  IsDateString,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 import { Types } from 'mongoose';
 
 export class CreateTaskDto {
@@ -16,6 +23,12 @@ export class CreateTaskDto {
   @ApiProperty()
   @IsBoolean()
   done?: boolean;
+
+  @ApiProperty()
+  @Transform(({ value }) => (value ? new Date(value) : null))
+  @IsNotEmpty()
+  @IsDate()
+  scheduledAt?: Date;
 
   @ApiHideProperty()
   user?: string | Types.ObjectId;

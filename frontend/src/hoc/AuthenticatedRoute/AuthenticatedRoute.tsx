@@ -6,13 +6,16 @@ import { useAuth } from "../../providers/AuthProvider";
 type Props = {};
 
 export default function AuthenticatedRoute({}: Props) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
+
   globalRouter.navigate = navigate;
+
   useEffect(() => {
-    if (!user) {
+    if (!user && !loading) {
       navigate("/auth/login");
     }
-  }, [user, navigate]);
+  }, [user, navigate, loading]);
+
   return <Outlet />;
 }
