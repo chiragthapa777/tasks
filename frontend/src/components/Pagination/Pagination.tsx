@@ -1,5 +1,5 @@
 import { paginationQuery } from "../../types/pagination-query.type";
-import Button from "../Button/Button";
+import Button from "../ui/Button/Button";
 
 type Props = {
   totalPages: number;

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { taskType } from "../../types/task.type";
-import Button from "../Button/Button";
 import { deleteTaskById, updateTaskById } from "../../services/task.service";
+import { taskType } from "../../types/task.type";
+import Button from "../ui/Button/Button";
 
 type Props = {
   task: taskType;

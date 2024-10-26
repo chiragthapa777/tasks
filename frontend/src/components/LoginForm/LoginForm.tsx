@@ -6,9 +6,9 @@ import { z } from "zod";
 import { useAuth } from "../../providers/AuthProvider";
 import { loginSchema } from "../../schemas/login.schema";
 import { login } from "../../services/user.service";
-import Alert from "../Alert/Alert";
-import Button from "../Button/Button";
-import InputField from "../InputField/InputField";
+import Alert from "../ui/Alert/Alert";
+import Button from "../ui/Button/Button";
+import InputField from "../ui/InputField/InputField";
 
 type Props = {};
 

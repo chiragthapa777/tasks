@@ -8,11 +8,11 @@ import {
   addTask as addTaskApi,
   updateTaskById,
 } from "../../services/task.service";
-import Alert from "../Alert/Alert";
-import Button from "../Button/Button";
-import InputField from "../InputField/InputField";
-import TextAreaInputField from "../TextAreaInputField/TextAreaInputField";
 import { taskType } from "../../types/task.type";
+import Alert from "../ui/Alert/Alert";
+import Button from "../ui/Button/Button";
+import InputField from "../ui/InputField/InputField";
+import TextAreaInputField from "../ui/TextAreaInputField/TextAreaInputField";
 
 type Props = {
   mode?: "add" | "edit";

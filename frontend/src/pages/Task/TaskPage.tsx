@@ -1,15 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import Pagination from "../../components/Pagination/Pagination";
-import Spinner from "../../components/Spinner/Spinner";
 import TaskCard from "../../components/TaskCard/TaskCard";
+import Alert from "../../components/ui/Alert/Alert";
+import Button from "../../components/ui/Button/Button";
+import Spinner from "../../components/ui/Spinner/Spinner";
+import { useDebounce } from "../../hooks/use-debounce/useDebounce";
 import { useAuth } from "../../providers/AuthProvider";
 import { getTasks as getTasksApi } from "../../services/task.service";
 import { paginationQuery } from "../../types/pagination-query.type";
 import { taskType } from "../../types/task.type";
-import { Link } from "react-router-dom";
-import Alert from "../../components/Alert/Alert";
-import Button from "../../components/Button/Button";
-import { useDebounce } from "../../hooks/use-debounce/useDebounce";
 
 type Props = {};
 

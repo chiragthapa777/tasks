@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Alert from "../../../components/Alert/Alert";
-import Spinner from "../../../components/Spinner/Spinner";
+import Alert from "../../../components/ui/Alert/Alert";
+import Spinner from "../../../components/ui/Spinner/Spinner";
 import TaskForm from "../../../components/TaskForm/TaskForm";
 import { getTaskById } from "../../../services/task.service";
 import { taskType } from "../../../types/task.type";
