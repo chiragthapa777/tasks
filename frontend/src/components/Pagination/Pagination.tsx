@@ -1,24 +1,30 @@
-import { useState } from "react";
+import { paginationQuery } from "../../types/pagination-query.type";
 import Button from "../Button/Button";
 
-type Props = { totalPages: number };
+type Props = {
+  totalPages: number;
+  setPagination: React.Dispatch<React.SetStateAction<paginationQuery>>;
+  currentPage: number;
+};
 
-export default function Pagination({ totalPages }: Props) {
-  const [currentPage, setCurrentPage] = useState(1);
-
+export default function Pagination({
+  totalPages,
+  currentPage,
+  setPagination,
+}: Props) {
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    setPagination((prev) => ({ ...prev, page }));
   };
 
   const handleNext = () => {
     if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+      setPagination((prev) => ({ ...prev, page: (prev.page ?? 1) + 1 }));
     }
   };
 
   const handlePrevious = () => {
     if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
+      setPagination((prev) => ({ ...prev, page: (prev.page ?? 1) - 1 }));
     }
   };
 

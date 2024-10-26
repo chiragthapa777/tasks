@@ -9,6 +9,7 @@ import { taskType } from "../../types/task.type";
 import { Link } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button/Button";
+import { useDebounce } from "../../hooks/use-debounce/useDebounce";
 
 type Props = {};
 
@@ -17,21 +18,23 @@ export default function TaskPage({}: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [pagination, setPagination] = useState<paginationQuery>({
-    limit: 20,
+    limit: 10,
     page: 1,
     search: "",
     sortBy: "createdAt",
     sortDirection: "desc",
+    totalPage: 1,
   });
   const { user } = useAuth();
   const sortValue = useMemo(
     () => `${pagination.sortBy},${pagination.sortDirection}`,
     [pagination.sortBy, pagination.sortDirection]
   );
+  const debouncedSearch = useDebounce(pagination.search, 1000);
 
   useEffect(() => {
     getTasks();
-  }, [sortValue, pagination.page]);
+  }, [sortValue, pagination.page, debouncedSearch, pagination.limit]);
 
   const setSortValue = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value || "createdAt,desc";
@@ -47,6 +50,10 @@ export default function TaskPage({}: Props) {
     try {
       const data = await getTasksApi(pagination);
       setTasks(data.data);
+      setPagination((pagination) => ({
+        ...pagination,
+        totalPage: data.paginationMeta.totalPage,
+      }));
     } catch (error) {
       setError(error instanceof Error ? error.message : (error as string));
     } finally {
@@ -77,6 +84,13 @@ export default function TaskPage({}: Props) {
             type="text"
             className="w-full outline-none text-xs"
             placeholder="Search ..."
+            value={pagination.search}
+            onChange={(e) => {
+              setPagination((pagination) => ({
+                ...pagination,
+                search: e.target.value,
+              }));
+            }}
           />
         </div>
         <div>
@@ -133,7 +147,13 @@ export default function TaskPage({}: Props) {
       )}
 
       {/* Pagination */}
-      {tasks.length > 0 && <Pagination totalPages={4} />}
+      {tasks.length > 0 && (
+        <Pagination
+          totalPages={pagination.totalPage ?? 1}
+          currentPage={pagination.page ?? 1}
+          setPagination={setPagination}
+        />
+      )}
     </div>
   );
 }

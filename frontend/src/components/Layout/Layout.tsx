@@ -14,7 +14,7 @@ export default function Layout({}: Props) {
           </h1>
           <button
             className="flex justify-center items-center underline gap-1 cursor-pointer"
-            onClick={logout}
+            onClick={() => logout()}
           >
             <span className="font-semibold">Logout</span>
           </button>

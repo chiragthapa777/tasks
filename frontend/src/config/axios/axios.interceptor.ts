@@ -3,13 +3,14 @@ import globalRouter from "../globalRouter";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:4747",
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("accessToken"),
-  },
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => config,
+  (config) => {
+    config.headers["Authorization"] =
+      "Bearer " + localStorage.getItem("accessToken");
+    return config;
+  },
   (error) => Promise.reject(error)
 );
 

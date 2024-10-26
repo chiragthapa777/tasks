@@ -4,4 +4,5 @@ export type paginationQuery = {
   limit?: number;
   sortBy?: string;
   sortDirection?: "asc" | "desc";
+  totalPage?: number;
 };
