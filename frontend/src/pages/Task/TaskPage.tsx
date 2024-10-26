@@ -109,7 +109,13 @@ export default function TaskPage({}: Props) {
           {" "}
           {tasks.map((task) => (
             <li key={task._id}>
-              <TaskCard />
+              <TaskCard
+                task={task}
+                invalidate={() => {
+                  getTasks();
+                }}
+                setError={setError}
+              />
             </li>
           ))}
         </ul>
