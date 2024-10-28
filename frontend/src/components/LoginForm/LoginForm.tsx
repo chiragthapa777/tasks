@@ -25,7 +25,7 @@ export default function LoginForm({}: Props) {
   });
   const {
     register,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid },
     getValues,
   } = form;
   const { user, setAuthUser } = useAuth();
@@ -68,6 +68,7 @@ export default function LoginForm({}: Props) {
       <InputField
         label="password"
         type="password"
+        placeholder="password"
         {...register("password")}
         errorMessage={errors.password?.message}
       />
@@ -75,7 +76,7 @@ export default function LoginForm({}: Props) {
         type="submit"
         className="text-white"
         loading={loading}
-        disabled={isDirty && !isValid}
+        disabled={!isValid}
       >
         Login
       </Button>

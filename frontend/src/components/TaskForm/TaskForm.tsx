@@ -35,7 +35,7 @@ export default function TaskForm({ mode = "add", task }: Props) {
   });
   const {
     register,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid },
     getValues,
   } = form;
   const navigate = useNavigate();

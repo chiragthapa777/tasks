@@ -17,12 +17,15 @@ const InputField = forwardRef<HTMLInputElement, Props>(
           {label}
         </label>
         <input
+          aria-labelledby={props.name}
+          aria-label={props.name}
           className={twMerge(
             `border p-2 rounded-md shadow-sm text-sm`,
             className,
             errorMessage && "border-red-500 focus:outline-none"
           )}
           {...props}
+          id={props.name}
           ref={ref}
         />
         <p className="text-red-500 text-xs"> {errorMessage}</p>

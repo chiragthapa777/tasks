@@ -86,7 +86,7 @@ export default function RegisterForm({}: Props) {
         type="submit"
         className="text-white"
         loading={loading}
-        disabled={isDirty && !isValid}
+        disabled={!isValid}
       >
         Register
       </Button>

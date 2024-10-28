@@ -18,6 +18,7 @@ const TextAreaInputField = forwardRef<HTMLTextAreaElement, Props>(
         </label>
         <textarea
           ref={ref}
+          id={props.name}
           className={twMerge(
             `border p-2 rounded-md shadow-sm text-sm`,
             className,

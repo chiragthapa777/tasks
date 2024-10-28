@@ -1,9 +1,14 @@
 import { render, RenderOptions } from "@testing-library/react";
 import React, { ReactElement } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <BrowserRouter>
+      <AuthProvider>{children}</AuthProvider>
+    </BrowserRouter>
+  );
 };
 
 const customRender = (
