@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 
 export type TaskDocument = HydratedDocument<Task>;
 
@@ -10,7 +10,7 @@ export type TaskDocument = HydratedDocument<Task>;
 })
 export class Task {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
-  user: mongoose.Schema.Types.ObjectId;
+  user: Types.ObjectId;
 
   @Prop({ type: String, index: true, required: true })
   title: string;

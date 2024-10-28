@@ -4,15 +4,15 @@ import { Model, RootFilterQuery, Types } from 'mongoose';
 import { PaginationHelperService } from 'src/common/helper/pagination-helper/pagination-helper.service';
 import { IFindOptions } from 'src/common/interface/find-option.interface';
 import { IGetTotalOptions } from 'src/common/interface/get-total-option.interface';
+import { IPaginationMeta } from 'src/common/interface/pagination-meta.interface';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Task, TaskDocument } from './entities/task.entity';
-import { IPaginationMeta } from 'src/common/interface/pagination-meta.interface';
 
 @Injectable()
 export class TaskService {
   constructor(
-    @InjectModel(Task.name) private taskModel: Model<Task>,
+    @InjectModel(Task.name) private taskModel: Model<TaskDocument>,
     private readonly paginationHelperService: PaginationHelperService,
   ) {}
 
@@ -27,8 +27,9 @@ export class TaskService {
   }
 
   async create(createTaskDto: CreateTaskDto): Promise<TaskDocument> {
-    const newUser = new this.taskModel(createTaskDto);
-    return await newUser.save();
+    const newUser = new Task();
+    Object.assign(newUser, createTaskDto);
+    return await this.taskModel.create(newUser);
   }
 
   async findAll(options?: IFindOptions<Task>): Promise<TaskDocument[]> {

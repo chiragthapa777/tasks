@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RootFilterQuery, Types } from 'mongoose';
-import { GetUser } from 'src/common/decorators/get-user.decorator';
-import { PaginationQueryDto } from 'src/common/dto/pagination.dto';
-import { IFindOptions } from 'src/common/interface/find-option.interface';
+import { GetUser } from '../../common/decorators/get-user.decorator';
+import { PaginationQueryDto } from '../../common/dto/pagination.dto';
+import { IFindOptions } from '../../common/interface/find-option.interface';
 import { AuthGuard } from '../user/guards/auth/auth.guard';
 import { IUserPayload } from '../user/interface/user-payload.interface';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -30,7 +30,7 @@ export class TaskController {
 
   @Post()
   create(@Body() createTaskDto: CreateTaskDto, @GetUser() user: IUserPayload) {
-    createTaskDto.user = new Types.ObjectId(user._id);
+    createTaskDto.user = new Types.ObjectId(user._id?.toString());
     return this.taskService.create(createTaskDto);
   }
 

@@ -14,7 +14,7 @@ import { IUserPayload } from './interface/user-payload.interface';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User.name) private userModel: Model<User>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
     private readonly authHelperService: AuthHelperService,
   ) {}
 
@@ -39,8 +39,9 @@ export class UserService {
     );
     createUserDto.password = hashedPassword;
 
-    const newUser = new this.userModel(createUserDto);
-    return newUser.save();
+    const newUser = new User();
+    Object.assign(newUser, createUserDto);
+    return await this.userModel.create(newUser);
   }
 
   async getUserAccessToken(

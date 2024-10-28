@@ -19,6 +19,7 @@ axiosInstance.interceptors.response.use(
   (error: AxiosError<any>) => {
     if (error.response && error.response.status === 401) {
       if (globalRouter.navigate) {
+        localStorage.removeItem("accessToken")
         globalRouter.navigate("/auth/login");
         return;
       }
