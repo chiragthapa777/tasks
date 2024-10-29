@@ -12,7 +12,6 @@ describe("TaskCard", () => {
     _id: "test_id",
   };
 
-  const invalidateMock = vitest.fn();
   const setErrorMock = vitest.fn();
 
   afterEach(() => {

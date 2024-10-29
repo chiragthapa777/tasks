@@ -6,9 +6,9 @@ import { z } from "zod";
 import { useAuth } from "../../providers/AuthProvider";
 import { registerSchema } from "../../schemas/register.schema";
 import { register as registerApi } from "../../services/user.service";
-import InputField from "../ui/InputField/InputField";
 import Alert from "../ui/Alert/Alert";
 import Button from "../ui/Button/Button";
+import InputField from "../ui/InputField/InputField";
 
 type Props = {};
 
@@ -25,7 +25,7 @@ export default function RegisterForm({}: Props) {
   });
   const {
     register,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid },
     getValues,
   } = form;
   const { user, setAuthUser } = useAuth();

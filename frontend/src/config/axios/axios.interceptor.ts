@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import globalRouter from "../globalRouter";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:4747",
+  baseURL: import.meta.env.VITE_API,
 });
 
 axiosInstance.interceptors.request.use(
@@ -19,7 +19,7 @@ axiosInstance.interceptors.response.use(
   (error: AxiosError<any>) => {
     if (error.response && error.response.status === 401) {
       if (globalRouter.navigate) {
-        localStorage.removeItem("accessToken")
+        localStorage.removeItem("accessToken");
         globalRouter.navigate("/auth/login");
         return;
       }
@@ -29,4 +29,4 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
-``
+``;
