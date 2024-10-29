@@ -6,11 +6,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend
-    environment:
-      - MONGODB_URI=mongodb://mongo:27017/mern-task
-      - APP_PORT=5000
-      - JWT_SECRET=secret
-      - APP_ENV=development
+    env_file:
+      - ./backend/.env
     ports:
       - "4747:5000"
     depends_on:
